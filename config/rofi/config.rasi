@@ -1,0 +1,5 @@
+configuration {
+  font: "pragmata pro 12";
+}
+
+@import "/usr/share/rofi/themes/solarized_alternate.rasi"

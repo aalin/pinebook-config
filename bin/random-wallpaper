@@ -1,0 +1,6 @@
+#!/bin/bash
+
+path=~/Pictures/Wallpapers
+filename=$(ls -1 "$path" | shuf | head -n 1)
+
+feh --bg-fill "$path/$filename"

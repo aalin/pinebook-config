@@ -1,0 +1,7 @@
+#!/bin/bash
+
+filename=$(date +"~/screenshots/screenshot-%Y-%m-%d-%T.png")
+
+scrot "$filename"
+
+notify-send "Scrot" "Screenshot saved to $filename"

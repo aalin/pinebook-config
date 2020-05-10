@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+filename=$1
+
+if [[ ! -f "$filename" ]]; then
+  echo "$filename does not exist!"
+  exit 1
+fi
+
+echo "Uploading $filename"
+
+output=$(curl --progress-bar -F "return_json=true" -F "image=@$filename" https://quad.pe/api/upload)
+server_path=$(echo "$output" | sed 's/.*"id":"\([^"]*\)".*/\1/')
+
+echo "Uploaded to https://quad.pe/$server_path"

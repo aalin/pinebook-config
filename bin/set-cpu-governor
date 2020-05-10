@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+
+require "shellwords"
+require "tempfile"
+
+def dialog_menu(title, items = [], opts = {})
+  opts = {
+    height: 10,
+    width: 20,
+    menu_height: 10,
+  }.merge(opts)
+
+  cmd = Shellwords.join([
+    "dialog",
+    "--keep-tite",
+    "--menu",
+    title,
+    opts[:height],
+    opts[:width],
+    opts[:menu_height],
+    *items.flatten
+  ])
+
+  tempfile = Tempfile.new
+
+  if system("#{cmd} 2> #{tempfile.path}")
+    File.read(tempfile)
+  else
+    false
+  end
+end
+
+def get_governors
+  output = `cpupower frequency-info`
+
+  current = output.match(/The governor "(.*)" may decide/)[1]
+  available = output.match(/available cpufreq governors: (.*)$/)[1].split
+
+  [current, available]
+end
+
+def alternate_buffer
+  print "\e[?1049h"
+  yield
+ensure
+  print "\e[?1049l"
+end
+
+current_governor = nil
+new_governor = nil
+
+alternate_buffer do
+  current_governor, available_governors = get_governors
+
+  new_governor = dialog_menu(
+    "Choose governor (current: #{current_governor})",
+    available_governors.map { |opt| [opt, opt] },
+    height: available_governors.length + 7,
+    menu_height: available_governors.length,
+    width: 50
+  )
+end
+
+if new_governor
+  puts "Changing governor from #{current_governor} to #{new_governor}"
+  system(Shellwords.join(["sudo", "cpupower", "frequency-set", "-g", new_governor]))
+else
+  puts "Cancelled"
+end

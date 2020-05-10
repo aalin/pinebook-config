@@ -1,0 +1,19 @@
+#!/bin/bash
+
+curr=$(brightnessctl get)
+max=$(brightnessctl max)
+
+step=$(echo "$curr $max" | awk '{ printf "%d\n", (1 + (10 - 1) * sin($1 / $2 * 1.57079632)) }')
+
+case $1 in
+  up)
+    brightnessctl set +$step%
+  ;;
+  down)
+    brightnessctl set $step%-
+  ;;
+  *)
+    echo "Adjust brightness according to a ramp"
+    echo
+    echo "Usage: $0 [up|down]"
+esac
