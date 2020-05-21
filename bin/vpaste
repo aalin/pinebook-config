@@ -2,10 +2,14 @@
 # Andy Spencer - Public domain
 uri="http://vpaste.net/"
 
+if [ $2 != "" ]; then
+  ft="-F ft=$2"
+fi
+
 if [ -f "$1" ]; then
-  out=`curl -s -F "text=<$1" "$uri?$2"`
+  out=`curl -s -F "text=<$1" $ft "$uri?$2"`
 else
-  out=`curl -s -F 'text=<-' "$uri?$1"`
+  out=`curl -s -F 'text=<-' $ft "$uri?$1"`
 fi
 
 echo "$out"

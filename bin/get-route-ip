@@ -1,0 +1,2 @@
+#!/bin/bash
+ip route | grep ^default | awk -F' ' '{ print $3 }'

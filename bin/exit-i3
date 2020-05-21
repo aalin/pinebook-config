@@ -1,0 +1,11 @@
+#!/bin/bash
+
+MENU="$(rofi -no-lazy-grab -sep '|' -dmenu -i -p 'Exit i3?' \
+-selected-row 1 \
+-l 2 \
+<<< "Yes, exit i3|No")"
+
+case "$MENU" in
+  Yes*) i3-msg exit ;;
+  No) ;;
+esac

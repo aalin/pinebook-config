@@ -13,5 +13,12 @@ echo "Uploading $filename"
 
 output=$(curl --progress-bar -F "return_json=true" -F "image=@$filename" https://quad.pe/api/upload)
 server_path=$(echo "$output" | sed 's/.*"id":"\([^"]*\)".*/\1/')
+url="https://quad.pe/$server_path"
 
-echo "Uploaded to https://quad.pe/$server_path"
+echo "Uploaded to $url"
+notify-send "quad.pe" "Uploaded to $url"
+
+if [ -x "`which xclip 2>/dev/null`" -a "$DISPLAY" ]; then
+  echo -n "$out" | xclip -i -selection primary
+  echo -n "$out" | xclip -i -selection clipboard
+fi

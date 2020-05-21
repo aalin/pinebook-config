@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filename=$(date +"~/screenshots/screenshot-%Y-%m-%d-%T.png")
+filename=${HOME}/$(date +"/screenshots/screenshot-%Y-%m-%d-%T.png")
 
 scrot "$filename"
 
