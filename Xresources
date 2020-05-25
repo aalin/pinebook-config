@@ -68,5 +68,3 @@ URxvt.url-launcher: firefox
 URxvt.matcher.button: 1
 URxvt.matcher.rend.0: Uline Bold fg5
 URxvt.urlButton: 1
-
-dzen2.font: xft:pragmatapro:pixelsize=12:antialias=true:hinting=true
