@@ -1,0 +1,9 @@
+#!/bin/bash
+
+filename=${HOME}/$(date +"/screenshots/screenshot-%Y-%m-%d-%T.png")
+
+scrot $* "$filename"
+
+if [[ -f "$filename" ]]; then
+  notify-send "Scrot" "Screenshot saved to $filename"
+fi

@@ -114,7 +114,8 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-bindsym Print exec --no-startup-id $HOME/bin/scrot-homedir
+bindsym Print exec --no-startup-id $HOME/bin/screenshot
+bindsym Shift+Print exec --no-startup-id $HOME/bin/screenshot -s
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
