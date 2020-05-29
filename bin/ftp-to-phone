@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sftp -P 8022 "$(get-route-ip)"
