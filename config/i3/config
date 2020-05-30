@@ -34,10 +34,11 @@ font pango:Pragmata Pro 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-restore-brightness --nofork -i $HOME/.config/i3lock-bg.png
 
-exec --no-startup-id setxkbmap -layout gb,se,se -variant ,,mac -option 'grp:alt_shift_toggle'
-exec --no-startup-id xset r rate 500 20
+exec --no-startup-id setxkbmap -layout gb,se -option 'grp:alt_shift_toggle'
+exec --no-startup-id xset r rate 400 30
 
 for_window [class="hello"] floating enable
+for_window [class="mpv"] floating enable, resize set 640 480, move position center
 
 # Disable titlebars
 # for_window [class=".*"] border pixel 0
@@ -205,12 +206,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#   position bottom
-#   status_command i3status
-# }
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
 
 exec picom &
 exec dunst &
