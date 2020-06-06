@@ -59,4 +59,8 @@ else
 fi
 
 echo
+echo "Adding ACPI event handlers"
+sudo cp -r acpi/* /etc/acpi
+
+echo
 success "Everything is set up!"
